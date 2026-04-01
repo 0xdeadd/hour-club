@@ -1,11 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Menu, X, Clock } from "lucide-react";
+import { Menu, X, Clock, LogOut } from "lucide-react";
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Don't show nav on login page
+  if (pathname === "/login") return null;
+
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    window.location.href = "/login";
+  }
+
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/announcements", label: "Announcements" },
+    { href: "/meetings", label: "Meetings" },
+    { href: "/resources", label: "Resources" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-warm-gray">
@@ -17,22 +35,25 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-navy-light">
-            <Link href="/#about" className="hover:text-amber transition-colors">
-              About
-            </Link>
-            <Link href="/#getting-here" className="hover:text-amber transition-colors">
-              Getting Here
-            </Link>
-            <Link href="/#get-involved" className="hover:text-amber transition-colors">
-              Get Involved
-            </Link>
-            <Link
-              href="/meetings"
-              className="inline-flex items-center gap-2 bg-navy text-white px-4 py-2 rounded-lg hover:bg-navy-light transition-colors"
+          <div className="hidden md:flex items-center gap-6 text-sm font-medium text-navy-light">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`hover:text-amber transition-colors ${
+                  pathname === link.href ? "text-amber" : ""
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center gap-1.5 text-text-muted hover:text-red-600 transition-colors"
             >
-              Meeting Schedule
-            </Link>
+              <LogOut className="w-4 h-4" aria-hidden="true" />
+              Log Out
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -51,34 +72,28 @@ export default function Navigation() {
       {mobileOpen && (
         <div className="md:hidden bg-white border-b border-warm-gray">
           <div className="px-4 py-4 flex flex-col gap-4 text-sm font-medium text-navy-light">
-            <Link
-              href="/#about"
-              className="hover:text-amber transition-colors"
-              onClick={() => setMobileOpen(false)}
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`hover:text-amber transition-colors ${
+                  pathname === link.href ? "text-amber" : ""
+                }`}
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <button
+              onClick={() => {
+                setMobileOpen(false);
+                handleLogout();
+              }}
+              className="inline-flex items-center gap-1.5 text-text-muted hover:text-red-600 transition-colors text-left"
             >
-              About
-            </Link>
-            <Link
-              href="/#getting-here"
-              className="hover:text-amber transition-colors"
-              onClick={() => setMobileOpen(false)}
-            >
-              Getting Here
-            </Link>
-            <Link
-              href="/#get-involved"
-              className="hover:text-amber transition-colors"
-              onClick={() => setMobileOpen(false)}
-            >
-              Get Involved
-            </Link>
-            <Link
-              href="/meetings"
-              className="inline-flex items-center justify-center gap-2 bg-navy text-white px-4 py-2 rounded-lg hover:bg-navy-light transition-colors"
-              onClick={() => setMobileOpen(false)}
-            >
-              Meeting Schedule
-            </Link>
+              <LogOut className="w-4 h-4" aria-hidden="true" />
+              Log Out
+            </button>
           </div>
         </div>
       )}

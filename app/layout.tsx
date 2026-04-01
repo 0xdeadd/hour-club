@@ -10,25 +10,24 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "The Hour Club — 24-Hour Recovery Clubhouse in Carrollton, GA",
+  title: "The Hour Club",
   description:
-    "The Hour Club is a 24-hour recovery clubhouse in Carrollton, GA hosting AA, NA, Al-Anon, and CMA meetings. All are welcome.",
+    "The Hour Club — a members-only recovery community hub in Carrollton, GA.",
   keywords: [
     "AA meetings Carrollton GA",
     "NA meetings Carrollton GA",
     "Al-Anon Carrollton GA",
     "CMA meetings Carrollton GA",
     "recovery clubhouse",
-    "24 hour meetings",
     "Alcoholics Anonymous",
     "Narcotics Anonymous",
     "The Hour Club",
     "Consolidated Group",
   ],
   openGraph: {
-    title: "The Hour Club — 24-Hour Recovery Clubhouse",
+    title: "The Hour Club",
     description:
-      "A place of recovery, 24 hours a day. AA, NA, Al-Anon, and CMA meetings in Carrollton, GA.",
+      "A members-only recovery community hub in Carrollton, GA.",
     type: "website",
     locale: "en_US",
   },

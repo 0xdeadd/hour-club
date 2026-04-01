@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Meeting Schedule — The Hour Club",
   description:
-    "Full weekly meeting schedule for The Hour Club in Carrollton, GA. AA, NA, Al-Anon, and CMA meetings throughout the week.",
+    "Weekly meeting schedule for The Hour Club. AA, NA, Al-Anon, and CMA meetings throughout the week.",
 };
 
 interface Meeting {

@@ -1,7 +1,15 @@
+"use client";
+
 import { Clock, MapPin } from "lucide-react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // Don't show footer on login page
+  if (pathname === "/login") return null;
+
   return (
     <footer className="bg-navy-dark text-white/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -13,7 +21,7 @@ export default function Footer() {
               <span>The Hour Club</span>
             </Link>
             <p className="text-sm text-white/60 leading-relaxed">
-              A place of recovery, 24 hours a day. All are welcome.
+              A welcoming recovery clubhouse in Carrollton, Georgia.
             </p>
           </div>
 
@@ -27,7 +35,6 @@ export default function Footer() {
                 Carrollton, GA 30117
               </span>
             </address>
-            <p className="text-sm mt-2 text-white/60">Open 24 hours</p>
           </div>
 
           {/* Quick Links */}
@@ -36,22 +43,22 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/meetings" className="hover:text-amber transition-colors">
-                  Meeting Schedule
+                  Meetings
                 </Link>
               </li>
               <li>
-                <Link href="/#about" className="hover:text-amber transition-colors">
-                  About
+                <Link href="/announcements" className="hover:text-amber transition-colors">
+                  Announcements
                 </Link>
               </li>
               <li>
-                <Link href="/#getting-here" className="hover:text-amber transition-colors">
-                  Getting Here
+                <Link href="/resources" className="hover:text-amber transition-colors">
+                  Resources
                 </Link>
               </li>
               <li>
-                <Link href="/#get-involved" className="hover:text-amber transition-colors">
-                  Get Involved
+                <Link href="/contact" className="hover:text-amber transition-colors">
+                  Contact
                 </Link>
               </li>
             </ul>
