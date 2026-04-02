@@ -21,6 +21,7 @@ export default function Navigation() {
     { href: "/", label: "Home" },
     { href: "/announcements", label: "Announcements" },
     { href: "/meetings", label: "Meetings" },
+    { href: "/events", label: "Events" },
     { href: "/resources", label: "Resources" },
     { href: "/contact", label: "Contact" },
   ];
